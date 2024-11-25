@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="ai.css">
+</head>
+<body>
+    <h1>FIND AND REPLACE USING JAVASCRIPT</h1>
+    <textarea id="text-area" rows="10" cols="50"></textarea>
+    <br>
+    <input type="text" id="find-input" placeholder="Find">
+    <input type="text" id="replace-input" placeholder="Replace"><br><br>
+    <button id="find-button" onclick="find()">Find</button>  
+    <button id="replace-button" onclick="replace()">Replace</button>
+    <br>
+    <h2 id="result"></h2>
+    <script>
+        const textArea = document.getElementById("text-area");
+        const findInput = document.getElementById("find-input");
+        const replaceInput = document.getElementById ("replace-input");
+        const findButton = document.getElementById("find-button");
+        const replaceButton = document.getElementById("replace-button");
+        const resultDiv = document.getElementById("result");
+
+        function find(){
+            let text = textArea.value;
+            let find = findInput.value;
+            let count = text.toLowerCase().split(find.toLowerCase()).length -1;
+            if(count == 0){
+                resultDiv.innerHTML = "Not found";
+            }else{
+                resultDiv.innerHTML = "Found  " +count+ ' '+ 'times'+ ' '+ find;
+            }
+        }
+    function replace(){
+    let text = textArea.value;
+    let find = findInput.value;
+    let replaceWith = replaceInput.value;
+    let regex = new RegExp('\\b' + find + '\\b', 'gi'); // 'gi' flag for global and case-insensitive search
+    let newText = text.replace(regex, replaceWith); 
+    if(newText === text){
+        resultDiv.innerHTML = "Not found";
+    }else{
+        resultDiv.innerHTML = "Replaced with " + replaceWith;
+        textArea.value = newText;
+    }
+}
+    window.onload = function() {
+    textArea.value = '';
+    findInput.value = '';
+    replaceInput.value = '';
+    resultDiv.innerHTML = '';
+}
+    </script>
+</body>
+</html>
